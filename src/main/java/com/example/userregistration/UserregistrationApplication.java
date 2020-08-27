@@ -3,6 +3,7 @@ package com.example.userregistration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class UserregistrationApplication {
 
@@ -11,3 +12,21 @@ public class UserregistrationApplication {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
