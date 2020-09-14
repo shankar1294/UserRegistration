@@ -1,8 +1,6 @@
 package com.example.userregistration.controller;
 
-import java.util.Date;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,41 +10,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.userregistration.model.User;
-import com.example.userregistration.repository.UserRepository;
+import com.example.userregistration.service.UserRegistrationService;
+import com.example.userregistration.util.Uservalidation;
 
 @RestController
 public class UserRegistrationController {
 	
 	@Autowired
-	UserRepository userRepository;
+	UserRegistrationService userRegistrationService;
 	
 	@PostMapping(value = "/user" , consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User createUser(@RequestBody Map<String, String> req ) {
+	public User createUser(@RequestBody Map<String, String> req ) throws Exception{
 		
-		User user = new User();
+		Uservalidation uservalidation = new Uservalidation();
+		uservalidation.validateRequest(req);
 		
-		user.setFirstname(req.get("firstname"));
-		user.setLastname(req.get("lastname"));
-		user.setEmail(req.get("email"));
-		user.setReg_date(new Date(System.currentTimeMillis()));
-	
-		return userRepository.save(user);
+		return userRegistrationService.createUser(req);
 	}
 	
 	
 	@PostMapping("/user/{id}")
     public User update(@PathVariable String id, @RequestBody Map<String, String> body){
-        int userId = Integer.parseInt(id);
-        
-        User user = null;
-        Optional<User> users = userRepository.findById(userId);
-        if(users.isPresent()) {
-        	user  = users.get();
-        	user.setFirstname(body.get("firstname"));
-    		user.setLastname(body.get("lastname"));
-    		user.setEmail(body.get("email"));         
-        }
-        return userRepository.save(user);
+       
+		return userRegistrationService.updateUser(id, body);
     }
 
 }
