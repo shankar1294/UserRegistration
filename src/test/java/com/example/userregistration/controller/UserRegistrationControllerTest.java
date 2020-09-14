@@ -95,7 +95,7 @@ class UserRegistrationControllerTest {
 
 		// Send course as body to /students/Student1/courses
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.post("/user/1")
+				.post("/user-update/1")
 				.accept(MediaType.APPLICATION_JSON).content(exampleCourseJson)
 				.contentType(MediaType.APPLICATION_JSON);
 

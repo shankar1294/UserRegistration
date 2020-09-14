@@ -1,5 +1,6 @@
 package com.example.userregistration.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,12 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-
+	
 	private String firstname;
 
 	private String lastname;
@@ -21,7 +27,7 @@ public class User {
 	private String email;
 
 	private Date reg_date;
-
+	
 	public Integer getId() {
 		return id;
 	}
